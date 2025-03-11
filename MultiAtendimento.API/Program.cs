@@ -6,6 +6,8 @@ using MultiAtendimento.API.Repository.BancoDeDados;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using MultiAtendimento.API.Models.FilterActionPersonalizado;
 using Microsoft.OpenApi.Models;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,9 +27,9 @@ builder.Services.AddControllers(opcoes =>
 });
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen(c =>
+builder.Services.AddSwaggerGen(options =>
 {
-    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
         Name = "Authorization",
         Type = SecuritySchemeType.Http,
@@ -37,7 +39,7 @@ builder.Services.AddSwaggerGen(c =>
         Description = "Insira o token JWT no formato 'Bearer {seu-token}'"
     });
 
-    c.AddSecurityRequirement(new Microsoft.OpenApi.Models.OpenApiSecurityRequirement
+    options.AddSecurityRequirement(new Microsoft.OpenApi.Models.OpenApiSecurityRequirement
     {
         {
             new OpenApiSecurityScheme
@@ -51,6 +53,8 @@ builder.Services.AddSwaggerGen(c =>
             Array.Empty<string>()
         }
     });
+
+    options.AddSignalRSwaggerGen();
 });
 
 
@@ -122,6 +126,11 @@ app.UseCors("CORSPolicy");
 
 app.UseAuthentication();
 app.UseAuthorization();
+
+using(var scope = app.Services.CreateScope())
+{
+    scope.ServiceProvider.GetService<ContextoDoBancoDeDados>().Database.Migrate();
+}
 
 app.MapControllers();
 app.MapHub<ChatHub>("/chatHub");

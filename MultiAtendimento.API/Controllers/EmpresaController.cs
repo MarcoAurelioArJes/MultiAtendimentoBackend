@@ -1,8 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using MultiAtendimento.API.Models.DTOs;
-using MultiAtendimento.API.Models.Interfaces;
+﻿using System.Net;
+using Microsoft.AspNetCore.Mvc;
 using MultiAtendimento.API.Services;
-using System.Net;
+using MultiAtendimento.API.Models.DTOs;
+using MultiAtendimento.API.Models.Constantes;
+using Microsoft.AspNetCore.Authorization;
 
 namespace MultiAtendimento.API.Controllers
 {
@@ -35,7 +36,36 @@ namespace MultiAtendimento.API.Controllers
             {
                 return StatusCode((int)HttpStatusCode.BadRequest, new RetornoPadraoView<object>
                 {
-                    Mensagem = ex.Message
+                    Mensagem = MensagemDeErroConstantes.OcorreuUmErroInesperado
+                });
+            }
+        }
+
+        [Authorize]
+        [HttpGet("ObterInformacoesEmpresaAtual")]
+        public IActionResult ObterInformacoesEmpresaAtual()
+        {
+            try
+            {
+                var empresa = _empresaService.ObterInformacoesEmpresaAtual();
+                return Ok(new RetornoPadraoView<EmpresaView>
+                {
+                    Mensagem = "Empresa obtida com sucesso!",
+                    Resultado = empresa
+                });
+            }
+            catch (BadHttpRequestException badHttpRequestException)
+            {
+                return StatusCode(badHttpRequestException.StatusCode, new RetornoPadraoView<object>
+                {
+                    Mensagem = badHttpRequestException.Message
+                });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode((int)HttpStatusCode.BadRequest, new RetornoPadraoView<object>
+                {
+                    Mensagem = MensagemDeErroConstantes.OcorreuUmErroInesperado
                 });
             }
         }

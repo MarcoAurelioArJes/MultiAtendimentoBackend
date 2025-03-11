@@ -25,6 +25,8 @@ namespace MultiAtendimento.API.Services
             CreateMap<Chat, ChatView>();
 
             CreateMap<Mensagem, MensagemView>();
+
+            CreateMap<Empresa, EmpresaView>();
         }
     }
 }

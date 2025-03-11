@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 using System.Net;
 using MultiAtendimento.API.Models;
 using MultiAtendimento.API.Models.Enums;
+using MultiAtendimento.API.Models.Constantes;
 
 namespace MultiAtendimento.API.Controllers
 {
@@ -42,7 +43,7 @@ namespace MultiAtendimento.API.Controllers
             {
                 return StatusCode((int)HttpStatusCode.BadRequest, new RetornoPadraoView<object>
                 {
-                    Mensagem = ex.Message
+                    Mensagem = MensagemDeErroConstantes.OcorreuUmErroInesperado
                 });
             }
         }
@@ -73,7 +74,7 @@ namespace MultiAtendimento.API.Controllers
             {
                 return StatusCode((int)HttpStatusCode.BadRequest, new RetornoPadraoView<object>
                 {
-                    Mensagem = ex.Message
+                    Mensagem = MensagemDeErroConstantes.OcorreuUmErroInesperado
                 });
             }
         }
@@ -101,7 +102,7 @@ namespace MultiAtendimento.API.Controllers
             {
                 return StatusCode((int)HttpStatusCode.BadRequest, new RetornoPadraoView<object>
                 {
-                    Mensagem = ex.Message
+                    Mensagem = MensagemDeErroConstantes.OcorreuUmErroInesperado
                 });
             }
         }
@@ -130,7 +131,7 @@ namespace MultiAtendimento.API.Controllers
             {
                 return StatusCode((int)HttpStatusCode.BadRequest, new RetornoPadraoView<object>
                 {
-                    Mensagem = ex.Message
+                    Mensagem = MensagemDeErroConstantes.OcorreuUmErroInesperado
                 });
             }
         }
@@ -156,7 +157,7 @@ namespace MultiAtendimento.API.Controllers
             {
                 return StatusCode((int)HttpStatusCode.BadRequest, new RetornoPadraoView<object>
                 {
-                    Mensagem = ex.Message
+                    Mensagem = MensagemDeErroConstantes.OcorreuUmErroInesperado
                 });
             }
         }

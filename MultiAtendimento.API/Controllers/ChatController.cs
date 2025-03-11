@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MultiAtendimento.API.Models;
+using MultiAtendimento.API.Models.Constantes;
 using MultiAtendimento.API.Models.DTOs;
 using MultiAtendimento.API.Models.Enums;
 using MultiAtendimento.API.Services;
@@ -49,7 +50,7 @@ namespace MultiAtendimento.API.Controllers
             {
                 return StatusCode((int)HttpStatusCode.BadRequest, new RetornoPadraoView<object>
                 {
-                    Mensagem = ex.Message
+                    Mensagem = MensagemDeErroConstantes.OcorreuUmErroInesperado
                 });
             }
         }

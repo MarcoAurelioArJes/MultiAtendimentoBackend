@@ -5,6 +5,7 @@ using MultiAtendimento.API.Services;
 using MultiAtendimento.API.Models.DTOs;
 using Microsoft.AspNetCore.Authorization;
 using MultiAtendimento.API.Models.Enums;
+using MultiAtendimento.API.Models.Constantes;
 
 namespace MultiAtendimento.API.Controllers
 {
@@ -42,7 +43,7 @@ namespace MultiAtendimento.API.Controllers
             {
                 return StatusCode((int)HttpStatusCode.BadRequest, new RetornoPadraoView<object>
                 {
-                    Mensagem = ex.Message
+                    Mensagem = MensagemDeErroConstantes.OcorreuUmErroInesperado
                 });
             }
         }
@@ -71,7 +72,7 @@ namespace MultiAtendimento.API.Controllers
             {
                 return StatusCode((int)HttpStatusCode.BadRequest, new RetornoPadraoView<object>
                 {
-                    Mensagem = ex.Message
+                    Mensagem = MensagemDeErroConstantes.OcorreuUmErroInesperado
                 });
             }
         }
@@ -100,7 +101,7 @@ namespace MultiAtendimento.API.Controllers
             {
                 return StatusCode((int)HttpStatusCode.BadRequest, new RetornoPadraoView<object>
                 {
-                    Mensagem = ex.Message
+                    Mensagem = MensagemDeErroConstantes.OcorreuUmErroInesperado
                 });
             }
         }
@@ -130,7 +131,7 @@ namespace MultiAtendimento.API.Controllers
             {
                 return StatusCode((int)HttpStatusCode.BadRequest, new RetornoPadraoView<object>
                 {
-                    Mensagem = ex.Message
+                    Mensagem = MensagemDeErroConstantes.OcorreuUmErroInesperado
                 });
             }
         }
@@ -159,7 +160,7 @@ namespace MultiAtendimento.API.Controllers
             {
                 return StatusCode((int)HttpStatusCode.BadRequest, new RetornoPadraoView<object>
                 {
-                    Mensagem = ex.Message
+                    Mensagem = MensagemDeErroConstantes.OcorreuUmErroInesperado
                 });
             }
         }
@@ -189,7 +190,7 @@ namespace MultiAtendimento.API.Controllers
             {
                 return StatusCode((int)HttpStatusCode.BadRequest, new RetornoPadraoView<object>
                 {
-                    Mensagem = ex.Message
+                    Mensagem = MensagemDeErroConstantes.OcorreuUmErroInesperado
                 });
             }
         }
@@ -226,7 +227,7 @@ namespace MultiAtendimento.API.Controllers
             {
                 return StatusCode((int)HttpStatusCode.BadRequest, new RetornoPadraoView<object>
                 {
-                    Mensagem = ex.Message
+                    Mensagem = MensagemDeErroConstantes.OcorreuUmErroInesperado
                 });
             }
         }
@@ -258,7 +259,7 @@ namespace MultiAtendimento.API.Controllers
             {
                 return StatusCode((int)HttpStatusCode.BadRequest, new RetornoPadraoView<object>
                 {
-                    Mensagem = ex.Message
+                    Mensagem = MensagemDeErroConstantes.OcorreuUmErroInesperado
                 });
             }
         }
@@ -292,7 +293,7 @@ namespace MultiAtendimento.API.Controllers
             {
                 return StatusCode((int)HttpStatusCode.BadRequest, new RetornoPadraoView<object>
                 {
-                    Mensagem = ex.Message
+                    Mensagem = MensagemDeErroConstantes.OcorreuUmErroInesperado
                 });
             }
         }

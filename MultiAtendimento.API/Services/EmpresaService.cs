@@ -1,4 +1,5 @@
-﻿using MultiAtendimento.API.Models;
+﻿using AutoMapper;
+using MultiAtendimento.API.Models;
 using MultiAtendimento.API.Models.DTOs;
 using MultiAtendimento.API.Models.Enums;
 using MultiAtendimento.API.Models.Interfaces;
@@ -11,12 +12,16 @@ namespace MultiAtendimento.API.Services
         private readonly IEmpresaRepository _empresaRepository;
         private readonly UsuarioService _usuarioService;
         private readonly SetorService _setorService;
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly IMapper _mapper;
 
-        public EmpresaService(IEmpresaRepository empresaRepository, UsuarioService usuarioService, SetorService setorService)
+        public EmpresaService(IEmpresaRepository empresaRepository, UsuarioService usuarioService, SetorService setorService, IHttpContextAccessor httpContextAccessor, IMapper mapper)
         {
             _empresaRepository = empresaRepository;
             _usuarioService = usuarioService;
             _setorService = setorService;
+            _httpContextAccessor = httpContextAccessor;
+            _mapper = mapper;
         }
 
         public void Criar(CadastroEmpresaInput cadastroEmpresaInput)
@@ -52,6 +57,12 @@ namespace MultiAtendimento.API.Services
                 AdministradorPrincipal = true
             };
             _usuarioService.CriarUsuarioNoCadastroEmpresa(usuario);
+        }
+
+        public EmpresaView ObterInformacoesEmpresaAtual()
+        {
+            string cnpj = _httpContextAccessor?.HttpContext?.User?.Claims?.FirstOrDefault(x => x.Type == "empresaCnpj")?.Value;
+            return _mapper.Map<EmpresaView>(_empresaRepository.ObterEmpresaPorCnpj(cnpj));
         }
     }
 }

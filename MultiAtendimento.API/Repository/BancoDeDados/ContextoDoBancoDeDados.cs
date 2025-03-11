@@ -15,7 +15,16 @@ namespace MultiAtendimento.API.Repository.BancoDeDados
         {
             base.OnConfiguring(optionsBuilder);
 
-            optionsBuilder.UseNpgsql(_configuration.GetConnectionString("DefaultConnection"));
+            string environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+
+            string connectionString = environment != "Production" 
+                                    ? _configuration.GetConnectionString("DefaultConnection")
+                                    : Environment.GetEnvironmentVariable("CONNECTION_STRING");
+
+            if (environment != null && !string.IsNullOrWhiteSpace(connectionString))
+            {
+                optionsBuilder.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
+            }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

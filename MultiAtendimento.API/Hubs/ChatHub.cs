@@ -1,17 +1,17 @@
-﻿using Microsoft.AspNetCore.SignalR;
-using MultiAtendimento.API.Services;
-using MultiAtendimento.API.Repository;
-using MultiAtendimento.API.Models.DTOs;
-using Microsoft.AspNetCore.Authorization;
-using MultiAtendimento.API.Models;
-using Microsoft.IdentityModel.Tokens;
-using AutoMapper;
-using System;
+﻿using AutoMapper;
 using System.Security.Claims;
+using MultiAtendimento.API.Models;
+using Microsoft.AspNetCore.SignalR;
+using SignalRSwaggerGen.Attributes;
+using MultiAtendimento.API.Services;
+using Microsoft.IdentityModel.Tokens;
+using MultiAtendimento.API.Models.DTOs;
 using MultiAtendimento.API.Models.Enums;
+using Microsoft.AspNetCore.Authorization;
 
 namespace MultiAtendimento.API.Hubs
 {
+    [SignalRHub]
     public class ChatHub : Hub
     {
         private readonly UsuarioService _usuarioService;
